@@ -1,0 +1,570 @@
+/* Scoped replacement for ON THE FRONTLINE only. */
+.frontline-contact-sheet {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 48px 0 28px;
+  color: #f5f4f0;
+  background: #071522;
+}
+.frontline-contact-sheet::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 48%, #152a3b70, transparent 62%);
+}
+.frontline-contact-sheet .frontline-contact-top,
+.frontline-contact-sheet .frontline-contact-bottom {
+  width: min(1320px, calc(100% - 100px));
+  margin-inline: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.frontline-contact-sheet .frontline-kicker {
+  color: #a3b3c0;
+  font-size: 8px;
+  letter-spacing: 1.65px;
+  line-height: 1.8;
+  font-weight: 500;
+}
+.frontline-contact-sheet .frontline-contact-top {
+  padding-bottom: 28px;
+  border-bottom: 1px solid #ffffff16;
+}
+.frontline-contact-sheet .frontline-contact-composition {
+  position: relative;
+  width: min(1320px, calc(100% - 80px));
+  height: 850px;
+  margin: 45px auto 0;
+}
+.frontline-contact-sheet .frontline-contact-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 720px;
+  max-width: 100%;
+  text-align: center;
+  pointer-events: none;
+  z-index: 2;
+}
+.frontline-contact-sheet .frontline-contact-center > .frontline-kicker {
+  font-size: 8px;
+  color: #b6c4ce;
+  letter-spacing: 2.1px;
+}
+.frontline-contact-sheet .frontline-contact-center h2 {
+  font-family: inherit;
+  font-size: clamp(68px, 7.2vw, 100px);
+  font-weight: 550;
+  line-height: 1.02;
+  letter-spacing: -5px;
+  margin: 20px 0 23px;
+  color: #f5f4f0;
+  text-wrap: initial;
+}
+.frontline-contact-sheet .frontline-contact-center em {
+  font-style: normal;
+  font-weight: 450;
+  color: #bec8ce;
+}
+.frontline-contact-sheet .frontline-contact-center em > span {
+  color: #e3463c;
+}
+.frontline-contact-sheet .frontline-contact-center > p {
+  margin: 0;
+  color: #a7b6c2;
+  font-size: 13px;
+  line-height: 1.8;
+}
+.frontline-contact-sheet .frontline-contact-photos {
+  position: absolute;
+  inset: 0;
+}
+.frontline-contact-sheet .frontline-contact-photo {
+  position: absolute;
+  display: block;
+  padding: 0;
+  background: none;
+  border: 0;
+  text-align: left;
+  color: #f5f4f0;
+  transform: translate3d(
+      var(--proximity-x, 0px),
+      calc(0px - var(--proximity-lift, 0px) - var(--hover-lift, 0px)),
+      0
+    )
+    rotate(var(--contact-rotation, 0deg));
+  transition: transform 650ms cubic-bezier(0.22, 1, 0.36, 1);
+  scroll-margin-top: 150px;
+  -webkit-tap-highlight-color: transparent;
+}
+.frontline-contact-sheet .frontline-photo-medical {
+  width: 260px;
+  left: 5%;
+  top: 65px;
+  --contact-rotation: -5deg;
+}
+.frontline-contact-sheet .frontline-photo-team {
+  width: 190px;
+  left: 43%;
+  top: 0;
+  --contact-rotation: 3deg;
+}
+.frontline-contact-sheet .frontline-photo-fire {
+  width: 280px;
+  right: 5%;
+  top: 65px;
+  --contact-rotation: 5deg;
+}
+.frontline-contact-sheet .frontline-photo-water {
+  width: 300px;
+  left: 9%;
+  bottom: 65px;
+  --contact-rotation: -4deg;
+}
+.frontline-contact-sheet .frontline-photo-training {
+  width: 300px;
+  right: 8%;
+  bottom: 35px;
+  --contact-rotation: 4deg;
+}
+.frontline-contact-sheet .frontline-contact-photo:hover,
+.frontline-contact-sheet .frontline-contact-photo:focus-visible {
+  --contact-rotation: 0deg;
+  --hover-lift: 9px;
+  z-index: 3;
+}
+.frontline-contact-sheet .frontline-contact-photo:focus-visible {
+  outline: 2px solid #ec7068;
+  outline-offset: 9px;
+}
+.frontline-contact-sheet .frontline-contact-image {
+  position: relative;
+  box-shadow: 0 18px 32px #00000028;
+}
+.frontline-contact-sheet .frontline-contact-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+  filter: none;
+}
+.frontline-contact-sheet .frontline-contact-caption {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 34px 16px 15px;
+  background: linear-gradient(transparent, #071522ed);
+  opacity: 0;
+  transform: translateY(5px);
+  transition:
+    opacity 350ms,
+    transform 450ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.frontline-contact-sheet .frontline-contact-caption > span {
+  font-size: 9px;
+  font-weight: 550;
+  letter-spacing: 1.9px;
+}
+.frontline-contact-sheet .frontline-contact-caption > p {
+  color: #dce3e8;
+  font-size: 10px;
+  margin: 7px 23px 0 0;
+  line-height: 1.5;
+}
+.frontline-contact-sheet .frontline-contact-caption > svg {
+  position: absolute;
+  right: 15px;
+  bottom: 17px;
+}
+.frontline-contact-sheet
+  .frontline-contact-photo:hover
+  .frontline-contact-caption,
+.frontline-contact-sheet
+  .frontline-contact-photo:focus-visible
+  .frontline-contact-caption {
+  opacity: 1;
+  transform: none;
+}
+.frontline-contact-sheet .frontline-contact-index {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 11px);
+  color: #9cafbe;
+  font-size: 7px;
+  letter-spacing: 1.5px;
+}
+.frontline-contact-sheet .frontline-contact-bottom {
+  border-top: 1px solid #ffffff16;
+  padding-top: 23px;
+  color: #9bafbe;
+  font-size: 8px;
+  letter-spacing: 1.2px;
+}
+.frontline-contact-sheet .frontline-touch-hint {
+  display: none;
+}
+
+.frontline-contact-sheet .frontline-story-dialog {
+  width: min(1100px, calc(100vw - 48px));
+  max-width: none;
+  max-height: calc(100dvh - 48px);
+  padding: 0;
+  border: 1px solid #ffffff25;
+  border-radius: 2px;
+  background: #091927;
+  color: #f5f4f0;
+  overflow: auto;
+  box-shadow: 0 30px 90px #00000070;
+}
+.frontline-contact-sheet .frontline-story-dialog::backdrop {
+  background: #020a13ed;
+}
+.frontline-contact-sheet .frontline-story-shell {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  min-height: 550px;
+  position: relative;
+}
+.frontline-contact-sheet .frontline-story-close {
+  display: grid;
+  place-items: center;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 3;
+  width: 44px;
+  height: 44px;
+  color: #f5f4f0;
+  background: #091927e8;
+  border: 1px solid #ffffff35;
+  border-radius: 50%;
+}
+.frontline-contact-sheet .frontline-story-image {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding: 40px 20px 55px;
+  background: #06131f;
+}
+.frontline-contact-sheet .frontline-story-image img {
+  display: block;
+  width: 100%;
+  max-width: var(--source-display-width);
+  max-height: 640px;
+  height: auto;
+  object-fit: contain;
+  filter: none;
+}
+.frontline-contact-sheet .frontline-story-image > span {
+  position: absolute;
+  left: 22px;
+  bottom: 22px;
+  font-size: 7px;
+  color: #9bafbe;
+  letter-spacing: 1.5px;
+}
+.frontline-contact-sheet .frontline-story-copy {
+  padding: 76px 35px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+.frontline-contact-sheet .frontline-story-copy h3 {
+  margin: 20px 0;
+  font-size: 36px;
+  line-height: 1.15;
+  font-weight: 550;
+  letter-spacing: -1.4px;
+  color: #f5f4f0;
+}
+.frontline-contact-sheet .frontline-story-copy > p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.9;
+  color: #aebecb;
+}
+.frontline-contact-sheet .frontline-story-service {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  border: 0;
+  border-bottom: 1px solid #a4b4c0;
+  background: none;
+  color: #f5f4f0;
+  padding: 14px 0;
+  min-height: 44px;
+  margin-top: 22px;
+  font-size: 11px;
+  text-align: left;
+}
+.frontline-contact-sheet .frontline-story-service svg {
+  flex-shrink: 0;
+}
+.frontline-contact-sheet .frontline-story-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 22px;
+  border-top: 1px solid #ffffff25;
+  margin-top: auto;
+  gap: 20px;
+}
+.frontline-contact-sheet .frontline-story-navigation button {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: 1px solid #ffffff35;
+  color: #f5f4f0;
+  border-radius: 50%;
+}
+.frontline-contact-sheet .frontline-story-navigation button:hover,
+.frontline-contact-sheet .frontline-story-close:hover {
+  background: #1a3347;
+}
+.frontline-contact-sheet .frontline-story-navigation > span {
+  font-size: 10px;
+}
+.frontline-contact-sheet .frontline-story-navigation i {
+  font-style: normal;
+  color: #92a5b3;
+  margin-left: 5px;
+}
+.frontline-contact-sheet .frontline-story-copy > .frontline-story-service {
+  margin-bottom: 28px;
+}
+.frontline-contact-sheet[data-contact-motion="off"] .frontline-contact-photo,
+.frontline-contact-sheet[data-contact-motion="off"] .frontline-contact-caption {
+  transition: none;
+}
+
+@media (min-width: 901px) and (max-width: 1100px) {
+  .frontline-contact-sheet .frontline-contact-composition {
+    height: 760px;
+  }
+  .frontline-contact-sheet .frontline-photo-medical {
+    width: 225px;
+    left: 3%;
+  }
+  .frontline-contact-sheet .frontline-photo-fire {
+    width: 240px;
+    right: 3%;
+  }
+  .frontline-contact-sheet .frontline-photo-water {
+    width: 250px;
+    left: 5%;
+  }
+  .frontline-contact-sheet .frontline-photo-training {
+    width: 250px;
+    right: 5%;
+  }
+  .frontline-contact-sheet .frontline-photo-team {
+    width: 160px;
+    left: 42%;
+  }
+  .frontline-contact-sheet .frontline-contact-center h2 {
+    font-size: 78px;
+  }
+}
+@media (max-width: 900px) {
+  .frontline-contact-sheet {
+    padding-top: 38px;
+  }
+  .frontline-contact-sheet .frontline-contact-top,
+  .frontline-contact-sheet .frontline-contact-bottom {
+    width: calc(100% - 48px);
+  }
+  .frontline-contact-sheet .frontline-contact-top > span:last-child {
+    display: none;
+  }
+  .frontline-contact-sheet .frontline-contact-composition {
+    width: 100%;
+    height: auto;
+    margin-top: 0;
+  }
+  .frontline-contact-sheet .frontline-contact-center {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    max-width: none;
+    padding: 55px 24px 35px;
+  }
+  .frontline-contact-sheet .frontline-contact-center h2 {
+    font-size: clamp(54px, 9vw, 80px);
+    letter-spacing: -3px;
+    line-height: 1.04;
+  }
+  .frontline-contact-sheet .frontline-contact-center > p {
+    font-size: 13px;
+  }
+  .frontline-contact-sheet .frontline-contact-photos {
+    position: relative;
+    inset: auto;
+    display: flex;
+    align-items: start;
+    gap: 24px;
+    padding: 22px 24px 25px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 24px;
+    scrollbar-width: thin;
+    scrollbar-color: #758998 #071522;
+  }
+  .frontline-contact-sheet .frontline-contact-photo {
+    position: relative;
+    inset: auto;
+    transform: none !important;
+    flex: 0 0 340px;
+    width: 340px;
+    transition: none;
+    scroll-snap-align: start;
+    margin: 0;
+  }
+  .frontline-contact-sheet .frontline-contact-caption {
+    position: relative;
+    inset: auto;
+    transform: none;
+    opacity: 1;
+    background: none;
+    padding: 20px 0 15px;
+  }
+  .frontline-contact-sheet .frontline-contact-caption > p {
+    font-size: 12px;
+    margin-top: 9px;
+  }
+  .frontline-contact-sheet .frontline-contact-caption > span {
+    font-size: 10px;
+  }
+  .frontline-contact-sheet .frontline-contact-caption > svg {
+    right: 0;
+    bottom: 17px;
+  }
+  .frontline-contact-sheet .frontline-contact-index {
+    position: relative;
+    inset: auto;
+    display: block;
+    padding-bottom: 8px;
+    font-size: 7px;
+  }
+  .frontline-contact-sheet .frontline-contact-bottom {
+    margin-top: 25px;
+    font-size: 7px;
+    gap: 16px;
+  }
+  .frontline-contact-sheet .frontline-desktop-hint {
+    display: none;
+  }
+  .frontline-contact-sheet .frontline-touch-hint {
+    display: inline;
+    letter-spacing: 0.3px;
+    font-size: 9px;
+  }
+  .frontline-contact-sheet .frontline-story-shell {
+    grid-template-columns: 1fr;
+  }
+  .frontline-contact-sheet .frontline-story-image {
+    padding: 25px 20px 45px;
+  }
+  .frontline-contact-sheet .frontline-story-image img {
+    max-height: 380px;
+  }
+  .frontline-contact-sheet .frontline-story-copy {
+    padding: 30px;
+  }
+  .frontline-contact-sheet .frontline-story-copy h3 {
+    max-width: 500px;
+    font-size: 36px;
+  }
+  .frontline-contact-sheet .frontline-story-navigation {
+    margin-top: 5px;
+  }
+}
+@media (max-width: 560px) {
+  .frontline-contact-sheet .frontline-contact-top,
+  .frontline-contact-sheet .frontline-contact-bottom {
+    width: calc(100% - 40px);
+  }
+  .frontline-contact-sheet .frontline-contact-top {
+    padding-bottom: 22px;
+  }
+  .frontline-contact-sheet .frontline-kicker {
+    font-size: 7px;
+    letter-spacing: 1.1px;
+  }
+  .frontline-contact-sheet .frontline-contact-center {
+    padding: 45px 20px 25px;
+  }
+  .frontline-contact-sheet .frontline-contact-center > .frontline-kicker {
+    font-size: 7px;
+  }
+  .frontline-contact-sheet .frontline-contact-center h2 {
+    font-size: clamp(45px, 10.7vw, 60px);
+    letter-spacing: -2.4px;
+    margin: 20px 0;
+  }
+  .frontline-contact-sheet .frontline-contact-center > p {
+    font-size: 12px;
+  }
+  .frontline-contact-sheet .frontline-contact-photos {
+    padding-inline: 20px;
+    scroll-padding-inline: 20px;
+    gap: 20px;
+  }
+  .frontline-contact-sheet .frontline-contact-photo {
+    flex-basis: 78vw;
+    width: 78vw;
+  }
+  .frontline-contact-sheet .frontline-contact-bottom {
+    flex-wrap: wrap;
+  }
+  .frontline-contact-sheet .frontline-touch-hint {
+    width: 100%;
+  }
+  .frontline-contact-sheet .frontline-story-dialog {
+    width: calc(100vw - 24px);
+    max-height: calc(100dvh - 24px);
+  }
+  .frontline-contact-sheet .frontline-story-image {
+    padding: 20px 12px 40px;
+  }
+  .frontline-contact-sheet .frontline-story-image img {
+    max-height: 300px;
+  }
+  .frontline-contact-sheet .frontline-story-image > span {
+    left: 16px;
+    bottom: 16px;
+    font-size: 6px;
+  }
+  .frontline-contact-sheet .frontline-story-copy {
+    padding: 25px;
+  }
+  .frontline-contact-sheet .frontline-story-copy h3 {
+    font-size: 30px;
+    letter-spacing: -1px;
+  }
+  .frontline-contact-sheet .frontline-story-copy > p {
+    font-size: 13px;
+  }
+  .frontline-contact-sheet .frontline-story-service {
+    font-size: 10px;
+  }
+}
+@media (hover: none) and (min-width: 901px) {
+  .frontline-contact-sheet .frontline-contact-caption {
+    opacity: 1;
+    transform: none;
+  }
+}

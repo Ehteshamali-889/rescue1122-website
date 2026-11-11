@@ -1,0 +1,208 @@
+{
+  "hero": {
+    "width": 1600,
+    "height": 1063,
+    "source": "https://www.rescue.gov.pk/FireService.aspx",
+    "variants": [
+      {
+        "src": "/images/hero-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/images/hero-800.webp",
+        "width": 800
+      },
+      {
+        "src": "/images/hero-1280.webp",
+        "width": 1280
+      },
+      {
+        "src": "/images/hero.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "fire": {
+    "width": 1600,
+    "height": 1063,
+    "source": "https://www.rescue.gov.pk/FireService.aspx",
+    "variants": [
+      {
+        "src": "/images/fire-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/images/fire-800.webp",
+        "width": 800
+      },
+      {
+        "src": "/images/fire-1280.webp",
+        "width": 1280
+      },
+      {
+        "src": "/images/fire.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "ambulance": {
+    "width": 1024,
+    "height": 579,
+    "source": "https://www.brecorder.com/news/40192293",
+    "variants": [
+      {
+        "src": "/images/ambulance-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/images/ambulance-800.webp",
+        "width": 800
+      },
+      {
+        "src": "/images/ambulance.webp",
+        "width": 1024
+      }
+    ]
+  },
+  "motorbike": {
+    "width": 800,
+    "height": 600,
+    "source": "https://tribune.com.pk/story/2035453/rescue-1122-responds-1073-emergencies-eidul-azha",
+    "variants": [
+      {
+        "src": "/images/motorbike-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/images/motorbike.webp",
+        "width": 800
+      }
+    ]
+  },
+  "water": {
+    "width": 850,
+    "height": 500,
+    "source": "https://www.samaa.tv/2087338396-punjab-flood-latest-from-chenab-and-ravi-rivers-as-authorities-blame-india",
+    "variants": [
+      {
+        "src": "/images/water-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/images/water-800.webp",
+        "width": 800
+      },
+      {
+        "src": "/images/water.webp",
+        "width": 850
+      }
+    ]
+  },
+  "rescue": {
+    "width": 1600,
+    "height": 1063,
+    "source": "https://www.rescue.gov.pk/FireService.aspx",
+    "variants": [
+      {
+        "src": "/images/rescue-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/images/rescue-800.webp",
+        "width": 800
+      },
+      {
+        "src": "/images/rescue-1280.webp",
+        "width": 1280
+      },
+      {
+        "src": "/images/rescue.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "community": {
+    "width": 4160,
+    "height": 2775,
+    "source": "https://www.lcwu.edu.pk/news-archive-2024/september/4290-rescue-1122-conducts-life-saving-training.html",
+    "variants": [
+      {
+        "src": "/images/community-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/images/community-800.webp",
+        "width": 800
+      },
+      {
+        "src": "/images/community-1280.webp",
+        "width": 1280
+      },
+      {
+        "src": "/images/community.webp",
+        "width": 4160
+      }
+    ]
+  },
+  "animal": {
+    "width": 740,
+    "height": 404,
+    "source": "https://www.urdupoint.com/en/pakistan/rescue-1122-treats-stray-dog-hit-by-a-car-1648742.html",
+    "variants": [
+      {
+        "src": "/images/animal-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/images/animal.webp",
+        "width": 740
+      }
+    ]
+  },
+  "building": {
+    "width": 1600,
+    "height": 1063,
+    "source": "https://www.rescue.gov.pk/FireService.aspx",
+    "variants": [
+      {
+        "src": "/images/building-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/images/building-800.webp",
+        "width": 800
+      },
+      {
+        "src": "/images/building-1280.webp",
+        "width": 1280
+      },
+      {
+        "src": "/images/building.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "flood": {
+    "width": 1800,
+    "height": 1080,
+    "source": "https://www.dawn.com/news/1942886",
+    "variants": [
+      {
+        "src": "/images/flood-480.webp",
+        "width": 480
+      },
+      {
+        "src": "/images/flood-800.webp",
+        "width": 800
+      },
+      {
+        "src": "/images/flood-1280.webp",
+        "width": 1280
+      },
+      {
+        "src": "/images/flood.webp",
+        "width": 1800
+      }
+    ]
+  }
+}
