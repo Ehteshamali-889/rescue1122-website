@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, ArrowUpRight, X } from "lucide-react";
 import { Photo } from "./content.jsx";
+import { useDialog } from "./hooks/useDialog.js";
 import images from "./image-manifest.json";
 import "./FrontlineContactSheet.css";
 
-// Existing organizational photographs and existing chapter narratives only.
+// Each photograph links to its matching service chapter.
 const photographs = [
   {
     image: "ambulance",
@@ -56,65 +57,16 @@ function FrontlineStory({
   onClose,
   onOpenService,
 }) {
-  const dialog = useRef(null);
-  const closing = useRef(false);
+  const { dialog, close } = useDialog({
+    motion,
+    origin,
+    getOrigin: () => getOrigin(index),
+    onClose,
+  });
   const photograph = photographs[index];
   const chapter = chapters[photograph.chapter];
   const source = images[photograph.image];
 
-  useEffect(() => {
-    const element = dialog.current;
-    const previous = document.activeElement;
-    const previousOverflow = document.body.style.overflow;
-    element.showModal();
-    document.body.style.overflow = "hidden";
-    if (motion && origin && element.animate) {
-      const target = element.getBoundingClientRect();
-      element.animate(
-        [
-          {
-            opacity: 0.25,
-            transform: `translate(${origin.left + origin.width / 2 - target.left - target.width / 2}px, ${origin.top + origin.height / 2 - target.top - target.height / 2}px) scale(${Math.min(0.8, origin.width / target.width)})`,
-          },
-          { opacity: 1, transform: "none" },
-        ],
-        { duration: 550, easing: "cubic-bezier(.22,1,.36,1)" },
-      );
-    }
-    return () => {
-      element.getAnimations().forEach((animation) => animation.cancel());
-      element.close();
-      document.body.style.overflow = previousOverflow;
-      previous?.focus({ preventScroll: true });
-    };
-  }, []);
-
-  const close = () => {
-    if (closing.current) return;
-    closing.current = true;
-    const element = dialog.current;
-    const target = getOrigin(index);
-    if (!motion || !target || !element.animate) {
-      onClose();
-      return;
-    }
-    const current = element.getBoundingClientRect();
-    element
-      .animate(
-        [
-          { opacity: 1, transform: "none" },
-          {
-            opacity: 0,
-            transform: `translate(${target.left + target.width / 2 - current.left - current.width / 2}px, ${target.top + target.height / 2 - current.top - current.height / 2}px) scale(${Math.min(0.8, target.width / current.width)})`,
-          },
-        ],
-        { duration: 320, easing: "cubic-bezier(.4,0,1,1)", fill: "forwards" },
-      )
-      .finished.then(() => {
-        if (dialog.current?.open) onClose();
-      })
-      .catch(() => {});
-  };
   const step = (direction) =>
     setIndex(
       (current) =>
@@ -165,7 +117,7 @@ function FrontlineStory({
           />
           <span>RESCUE 1122 / {chapter.word}</span>
         </div>
-        <div className="frontline-story-copy" key={index}>
+        <div className="frontline-story-copy">
           <span className="frontline-kicker">
             CHAPTER {chapter.number} / {chapter.word}
           </span>

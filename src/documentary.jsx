@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   ArrowUpRight,
   ArrowRight,
@@ -23,49 +17,11 @@ import {
 import { Photo, services } from "./content.jsx";
 import imageManifest from "./image-manifest.json";
 import FrontlineContactSheet from "./FrontlineContactSheet.jsx";
+import { useMotion } from "./context/MotionContext.jsx";
+import { useVisible } from "./hooks/useVisible.js";
+import { useMediaQuery } from "./hooks/useMediaQuery.js";
+import { useDialog } from "./hooks/useDialog.js";
 
-const MotionContext = createContext(null);
-export function useMotion() {
-  return useContext(MotionContext);
-}
-export function MotionProvider({ children }) {
-  const [motion, setMotion] = useState(
-    () => !matchMedia("(prefers-reduced-motion: reduce)").matches,
-  );
-  useEffect(() => {
-    const media = matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setMotion(!media.matches);
-    media.addEventListener("change", update);
-    return () => media.removeEventListener("change", update);
-  }, []);
-  useEffect(() => {
-    document.body.dataset.motion = motion ? "on" : "off";
-    return () => delete document.body.dataset.motion;
-  }, [motion]);
-  return (
-    <MotionContext.Provider value={{ motion, setMotion }}>
-      {children}
-    </MotionContext.Provider>
-  );
-}
-function useVisible(ref) {
-  const [visible, setVisible] = useState(false);
-  const [tabVisible, setTabVisible] = useState(!document.hidden);
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => setVisible(entry.isIntersecting),
-      { threshold: 0.1 },
-    );
-    if (ref.current) observer.observe(ref.current);
-    const update = () => setTabVisible(!document.hidden);
-    document.addEventListener("visibilitychange", update);
-    return () => {
-      observer.disconnect();
-      document.removeEventListener("visibilitychange", update);
-    };
-  }, [ref]);
-  return visible && tabVisible;
-}
 const heroScenes = [
   {
     image: "hero",
@@ -266,65 +222,14 @@ const stories = [
   },
 ];
 function StoryViewer({ index, setIndex, onClose, origin, getOrigin }) {
-  const dialog = useRef(null);
-  const closing = useRef(false);
   const { motion } = useMotion();
+  const { dialog, close } = useDialog({
+    motion,
+    origin,
+    getOrigin: () => getOrigin(index),
+    onClose,
+  });
   const story = stories[index];
-  useEffect(() => {
-    const el = dialog.current;
-    const previous = document.activeElement;
-    const oldOverflow = document.body.style.overflow;
-    el.showModal();
-    document.body.style.overflow = "hidden";
-    if (motion && origin && el.animate) {
-      const target = el.getBoundingClientRect();
-      const dx =
-        origin.left + origin.width / 2 - target.left - target.width / 2;
-      const dy =
-        origin.top + origin.height / 2 - target.top - target.height / 2;
-      el.animate(
-        [
-          {
-            transform: `translate(${dx}px,${dy}px) scale(${Math.min(0.85, origin.width / target.width)})`,
-            opacity: 0.4,
-          },
-          { transform: "none", opacity: 1 },
-        ],
-        { duration: 650, easing: "cubic-bezier(.2,.8,.2,1)" },
-      );
-    }
-    return () => {
-      el.getAnimations().forEach((a) => a.cancel());
-      el.close();
-      document.body.style.overflow = oldOverflow;
-      previous?.focus();
-    };
-  }, []);
-  const close = () => {
-    if (closing.current) return;
-    closing.current = true;
-    const el = dialog.current;
-    const source = getOrigin(index);
-    if (!motion || !source || !el.animate) {
-      onClose();
-      return;
-    }
-    const r = el.getBoundingClientRect();
-    el.animate(
-      [
-        { transform: "none", opacity: 1 },
-        {
-          transform: `translate(${source.left + source.width / 2 - r.left - r.width / 2}px,${source.top + source.height / 2 - r.top - r.height / 2}px) scale(${Math.min(0.8, source.width / r.width)})`,
-          opacity: 0,
-        },
-      ],
-      { duration: 380, easing: "cubic-bezier(.4,0,1,1)", fill: "forwards" },
-    )
-      .finished.then(() => {
-        if (dialog.current?.open) onClose();
-      })
-      .catch(() => {});
-  };
   const step = (direction) =>
     setIndex((i) => (i + direction + stories.length) % stories.length);
   return (
@@ -408,6 +313,7 @@ export function SpatialGallery() {
   const wave = useRef(null);
   useEffect(() => {
     if (!motion || view !== "gallery") return;
+    const elements = panels.current;
     let frame = 0,
       alive = true;
     const states = stories.map(() => ({
@@ -472,7 +378,7 @@ export function SpatialGallery() {
       alive = false;
       cancelAnimationFrame(frame);
       wave.current = null;
-      panels.current.forEach((panel) => {
+      elements.forEach((panel) => {
         if (panel) panel.style.removeProperty("transform");
       });
     };
@@ -529,6 +435,7 @@ export function SpatialGallery() {
         {stories.map((story, i) => (
           <button
             className="story-panel"
+            aria-haspopup="dialog"
             ref={(el) => (panels.current[i] = el)}
             key={story.title}
             onClick={(event) => open(i, event)}
@@ -625,6 +532,7 @@ export function FrontlineChapters({ onOpenService }) {
   );
 }
 export function ServiceExplorer({ onOpenService }) {
+  const compact = useMediaQuery("(max-width: 800px)");
   const [active, setActive] = useState(0);
   const tabs = useRef([]);
   const service = services[active];
@@ -666,6 +574,7 @@ export function ServiceExplorer({ onOpenService }) {
             className="service-tabs"
             role="tablist"
             aria-label="Rescue services"
+            aria-orientation={compact ? "horizontal" : "vertical"}
           >
             {services.map((item, i) => (
               <button
@@ -691,10 +600,11 @@ export function ServiceExplorer({ onOpenService }) {
             role="tabpanel"
             aria-labelledby={"service-tab-" + active}
             className="service-feature-panel"
+            tabIndex={0}
           >
             <div className="service-explorer-photo" key={service.image}>
               <Photo
-                name={service.image.split(".")[0]}
+                name={service.image}
                 alt={service.name + " - Rescue 1122"}
                 sizes="(max-width: 800px) 90vw, 750px"
               />

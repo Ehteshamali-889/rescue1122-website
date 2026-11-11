@@ -15,7 +15,7 @@ export const services = [
   {
     name: "Ambulance service",
     text: "Expert care, from the first response to the hospital.",
-    image: "ambulance.jpg",
+    image: "ambulance",
     icon: HeartPulse,
     detail:
       "Emergency medical response and patient transport. Call 1122 and share your exact location and the nature of the emergency.",
@@ -23,7 +23,7 @@ export const services = [
   {
     name: "Fire & rescue",
     text: "Trained to respond when every second matters.",
-    image: "fire.jpg",
+    image: "fire",
     icon: Flame,
     detail:
       "Firefighting, technical rescue and response to hazardous incidents. Move to a safe location and call 1122.",
@@ -31,7 +31,7 @@ export const services = [
   {
     name: "Motorbike rescue",
     text: "Reaching you through the busiest streets.",
-    image: "motorbike.png",
+    image: "motorbike",
     icon: Bike,
     detail:
       "Motorbike responders bring emergency care through congested streets while ambulance support is coordinated.",
@@ -39,7 +39,7 @@ export const services = [
   {
     name: "Water rescue",
     text: "Specialist response, on and beneath the water.",
-    image: "water.png",
+    image: "water",
     icon: Waves,
     detail:
       "Specialist teams respond to water and flood emergencies. Stay away from floodwater and call 1122 for rescue assistance.",
@@ -47,7 +47,7 @@ export const services = [
   {
     name: "Technical rescue",
     text: "Skilled teams. Complex situations. One mission.",
-    image: "rescue.jpg",
+    image: "rescue",
     icon: LifeBuoy,
     detail:
       "Specialized rescue operations for road crashes, building collapse and other complex emergencies.",
@@ -55,7 +55,7 @@ export const services = [
   {
     name: "Community safety",
     text: "Building a safer Punjab, together.",
-    image: "community.jpg",
+    image: "community",
     icon: HandHeart,
     detail:
       "Community education and practical training help citizens learn lifesaving skills. Explore the training programmes below.",
@@ -63,7 +63,7 @@ export const services = [
   {
     name: "Animal rescue",
     text: "Compassionate help for animals in distress.",
-    image: "animal.png",
+    image: "animal",
     icon: PawPrint,
     detail:
       "Rescue support for animals trapped or in dangerous situations. Call 1122 to describe the incident and location.",
@@ -71,7 +71,7 @@ export const services = [
   {
     name: "Building safety",
     text: "Safer spaces start with prevention.",
-    image: "building.jpg",
+    image: "building",
     icon: Building2,
     detail:
       "Building safety guidance supports prevention and safer communities. Visit the official Rescue website for regulations and guidance.",
@@ -79,7 +79,7 @@ export const services = [
   {
     name: "Disaster response",
     text: "Coordinated care through complex emergencies.",
-    image: "flood.webp",
+    image: "flood",
     icon: ShieldCheck,
     detail:
       "Rescue 1122 brings medical response, firefighting and specialist rescue together for emergencies including floods and building collapse. Call 1122 for emergency assistance.",
@@ -87,7 +87,7 @@ export const services = [
   {
     name: "Emergency rescue training",
     text: "Preparation, practice and professional teamwork.",
-    image: "rescue.webp",
+    image: "rescue",
     icon: LifeBuoy,
     detail:
       "Training and preparedness support professional emergency response. Visit the official Rescue 1122 website for Emergency Services Academy information; community CPR and volunteer programmes are linked on this page.",
